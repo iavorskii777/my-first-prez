@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тема 1. Презентация как жанр деловой коммуникации</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b18;
+  --bg2:#0d1428;
+  --card:rgba(255,255,255,.06);
+  --border:rgba(120,180,255,.25);
+  --text:#eaf2ff;
+  --muted:#9fb3d9;
+  --accent:#4cc9f0;
+  --accent2:#b388ff;
+  --accent3:#00e5a0;
+  --code-bg:rgba(0,0,0,.45);
+}
+body.light{
+  --bg:#f2f6ff;
+  --bg2:#e6ecff;
+  --card:rgba(255,255,255,.75);
+  --border:rgba(30,80,160,.18);
+  --text:#101a2e;
+  --muted:#4a5b78;
+  --accent:#0066ff;
+  --accent2:#7a2bff;
+  --accent3:#00a86b;
+  --code-bg:rgba(10,20,40,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(76,201,240,.18), transparent 35%),
+    radial-gradient(circle at 90% 20%, rgba(179,136,255,.18), transparent 35%),
+    radial-gradient(circle at 50% 100%, rgba(0,229,160,.12), transparent 40%),
+    linear-gradient(135deg,var(--bg),var(--bg2));
+  min-height:100vh;
+  transition:.4s;
+}
+header{
+  position:sticky;top:0;z-index:20;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 28px;
+  background:rgba(10,16,32,.55);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+body.light header{background:rgba(255,255,255,.65)}
+.brand{font-weight:900;letter-spacing:.5px}
+.brand span{color:var(--accent)}
+.controls{display:flex;gap:10px}
+button{
+  font-family:inherit;font-weight:700;cursor:pointer;
+  border:1px solid var(--border);
+  background:var(--card);color:var(--text);
+  padding:10px 16px;border-radius:12px;transition:.25s;
+}
+button:hover{transform:translateY(-2px);border-color:var(--accent)}
+main{max-width:1150px;margin:auto;padding:40px 24px 80px}
+.slide{
+  display:none;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:38px;
+  margin-bottom:26px;
+  backdrop-filter:blur(10px);
+  animation:appear .5s ease;
+}
+.slide.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(30px,5vw,52px);font-weight:900;line-height:1.1}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:18px}
+h3{margin:18px 0 10px;color:var(--accent)}
+p,li{line-height:1.65;color:var(--text)}
+ul{margin:12px 0 12px 22px}
+.muted{color:var(--muted)}
+.tag{
+  display:inline-block;margin-bottom:16px;
+  padding:6px 14px;border-radius:999px;
+  border:1px solid var(--border);
+  color:var(--accent);font-size:13px;font-weight:700;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:20px}
+.card{
+  border:1px solid var(--border);border-radius:18px;padding:20px;
+  background:rgba(127,127,127,.08);
+}
+.card b{color:var(--accent2)}
+pre{
+  background:var(--code-bg);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+  overflow:auto;
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+  line-height:1.55;
+  color:var(--text);
+}
+code{font-family:'JetBrains Mono',monospace}
+a{color:var(--accent);text-decoration:none;border-bottom:1px dashed var(--accent)}
+a:hover{color:var(--accent3)}
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:28px;gap:12px;flex-wrap:wrap;
+}
+.progress{
+  height:5px;border-radius:99px;background:var(--border);overflow:hidden;margin-bottom:22px;
+}
+.progress div{
+  height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transition:.35s;
+}
+table{width:100%;border-collapse:collapse;margin-top:16px;font-size:14px}
+th,td{border:1px solid var(--border);padding:10px;text-align:left}
+th{background:rgba(76,201,240,.12)}
+footer{text-align:center;padding:24px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">DIGITAL<span>·</span>PRESENTATION</div>
+  <div class="controls">
+    <button onclick="prevSlide()">← Назад</button>
+    <button onclick="nextSlide()">Вперёд →</button>
+    <button onclick="toggleTheme()">🌗 Тема</button>
+  </div>
+</header>
+
+<main>
+  <div class="progress"><div id="bar"></div></div>
+
+  <section class="slide active">
+    <span class="tag">Деловая коммуникация · Python · Data Science</span>
+    <h1>Презентация как жанр деловой коммуникации</h1>
+    <p class="muted">Тема 1. Современная деловая риторика, этос, логос, пафос и качества публичной речи.</p>
+    <div class="grid">
+      <div class="card"><b>Цель</b><p>Научиться превращать анализ данных в убедительное деловое сообщение.</p></div>
+      <div class="card"><b>Инструменты</b><p>Python, pandas, Matplotlib, Seaborn, HTML-презентация.</p></div>
+      <div class="card"><b>Результат</b><p>Аналитические выводы, графики и рекомендации для руководства.</p></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Что такое деловая презентация?</h2>
+    <p><b>Деловая презентация</b> — целенаправленное сообщение, представляющее проект, продукт, исследование или управленческое решение заинтересованной аудитории.</p>
+    <ul>
+      <li>Имеет конкретную деловую цель.</li>
+      <li>Адаптируется под аудиторию.</li>
+      <li>Сочетает речь, данные и визуализацию.</li>
+      <li>Завершается выводом или призывом к действию.</li>
+    </ul>
+    <p class="muted">Принцип: одна мысль — один слайд — один вывод.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Современная деловая риторика</h2>
+    <div class="grid">
+      <div class="card"><b>Адресность</b><p>Речь строится под конкретную аудиторию и её интересы.</p></div>
+      <div class="card"><b>Логичность</b><p>Проблема → анализ → решение → выгоды → следующий шаг.</p></div>
+      <div class="card"><b>Доказательность</b><p>Тезисы подтверждаются данными, фактами и источниками.</p></div>
+      <div class="card"><b>Наглядность</b><p>График объясняет тенденцию быстрее, чем абзац текста.</p></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Этос, логос и пафос</h2>
+    <table>
+      <tr><th>Элемент</th><th>Содержание</th><th>В презентации</th></tr>
+      <tr><td><b>Этос</b></td><td>Доверие и авторитет спикера</td><td>Опыт, источники, честность, корректность</td></tr>
+      <tr><td><b>Логос</b></td><td>Логика и доказательства</td><td>Метрики, сравнения, причинно-следственные связи</td></tr>
+      <tr><td><b>Пафос</b></td><td>Эмоциональное вовлечение</td><td>Кейс, ценность решения, образ результата</td></tr>
+    </table>
+    <p class="muted">Классическая модель убеждения восходит к риторике Аристотеля. Подробнее: <a href="https://thedecisionlab.com/reference-guide/philosophy/ethos-pathos-and-logos" target="_blank">Ethos, Pathos and Logos</a>.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Речевая культура делового человека</h2>
+    <ul>
+      <li>Точность формулировок и отсутствие двусмысленностей.</li>
+      <li>Понятность: термины объясняются примерами.</li>
+      <li>Чистота речи: без слов-паразитов и канцеляризмов.</li>
+      <li>Выразительность: интонация, паузы, акценты.</li>
+      <li>Информативность: новые и полезные для аудитории сведения.</li>
+    </ul>
+    <p class="muted">Плохо: «мы что-то улучшили». Хорошо: «доля корректных прогнозов выросла с 78% до 86%».</p>
+  </section>
+
+  <section class="slide">
+    <h2>Практикум: анализ онлайн-курсов</h2>
+    <p>Задача — определить наиболее перспективную категорию курсов и подготовить рекомендацию для руководства.</p>
+    <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = {
+    "course": ["Python для анализа данных", "Основы Data Science",
+               "Машинное обучение", "Веб-разработка"],
+    "category": ["Data Science", "Data Science",
+                 "Data Science", "Разработка"],
+    "students": [1200, 950, 640, 870],
+    "rating": [4.7, 4.5, 4.8, 4.4],
+    "completion_rate": [0.62, 0.55, 0.48, 0.51],
+    "revenue": [1800000, 1320000, 1150000, 1010000]
+}
+
+df = pd.DataFrame(data)
+df["revenue_per_student"] = df["revenue"] / df["students"]
+print(df)</code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>Расчёт метрик по категориям</h2>
+    <pre><code>summary = (
+    df.groupby("category", as_index=False)
+      .agg(
+          courses=("course", "count"),
+          students=("students", "sum"),
+          avg_rating=("rating", "mean"),
+          avg_completion=("completion_rate", "mean"),
+          revenue=("revenue", "sum")
+      )
+      .sort_values("revenue", ascending=False)
+)
+
+summary["revenue_per_student"] = summary["revenue"] / summary["students"]
+print(summary)</code></pre>
+    <p class="muted">Метрика «выручка на студента» показывает коммерческую эффективность категории, а не только её масштаб.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Визуализация для слайда</h2>
+    <pre><code>plt.figure(figsize=(10, 5))
+
+sns.barplot(
+    data=summary,
+    x="revenue",
+    y="category",
+    hue="category",
+    palette="viridis",
+    legend=False
+)
+
+plt.title("Выручка по категориям онлайн-курсов")
+plt.xlabel("Выручка, руб.")
+plt.ylabel("Категория")
+plt.tight_layout()
+plt.show()</code></pre>
+    <p class="muted">Примеры и документация: <a href="https://seaborn.pydata.org/" target="_blank">Seaborn</a>, <a href="https://matplotlib.org/stable/" target="_blank">Matplotlib</a>, <a href="https://www.kaggle.com/learn/data-visualization" target="_blank">Kaggle Data Visualization</a>.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Выводы и рекомендация</h2>
+    <ul>
+      <li>Категория <b>Data Science</b> демонстрирует наибольшую выручку.</li>
+      <li>Высокий рейтинг не гарантирует высокую завершаемость курса.</li>
+      <li>Для решения важны выручка, выручка на студента и качество обучения.</li>
+      <li>Рекомендация: расширить линейку Data Science-курсов и усилить проектную практику.</li>
+    </ul>
+    <p class="muted">Формула вывода: наблюдение → причина → рекомендация.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Источники и материалы</h2>
+    <ul>
+      <li><a href="https://pandas.pydata.org/docs/" target="_blank">Документация pandas</a></li>
+      <li><a href="https://seaborn.pydata.org/" target="_blank">Документация Seaborn</a></li>
+      <li><a href="https://matplotlib.org/stable/" target="_blank">Документация Matplotlib</a></li>
+      <li><a href="https://github.com/donnemartin/data-science-ipython-notebooks" target="_blank">GitHub: data-science-ipython-notebooks</a></li>
+      <li><a href="https://www.kaggle.com/learn/data-visualization" target="_blank">Kaggle: Data Visualization</a></li>
+      <li><a href="https://huggingface.co/" target="_blank">Hugging Face</a></li>
+      <li><a href="https://habr.com/ru/" target="_blank">Хабр</a></li>
+      <li><a href="https://cyberleninka.ru/" target="_blank">КиберЛенинка</a></li>
+      <li><a href="https://dzen.ru/" target="_blank">Дзен</a></li>
+      <li><a href="https://vk.com/" target="_blank">VK</a></li>
+    </ul>
+  </section>
+
+  <div class="nav">
+    <button onclick="prevSlide()">← Предыдущий слайд</button>
+    <span id="counter" class="muted"></span>
+    <button onclick="nextSlide()">Следующий слайд →</button>
+  </div>
+</main>
+
+<footer>
+  Учебная HTML-презентация · Тема 1 · Презентация как жанр деловой коммуникации
+</footer>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+let current = 0;
+
+function showSlide(n){
+  slides[current].classList.remove("active");
+  current = (n + slides.length) % slides.length;
+  slides[current].classList.add("active");
+  document.getElementById("bar").style.width =
+    ((current + 1) / slides.length * 100) + "%";
+  document.getElementById("counter").textContent =
+    `Слайд ${current + 1} из ${slides.length}`;
+}
+
+function nextSlide(){ showSlide(current + 1); }
+function prevSlide(){ showSlide(current - 1); }
+
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
+
+document.addEventListener("keydown", e => {
+  if(e.key === "ArrowRight" || e.key === " ") nextSlide();
+  if(e.key === "ArrowLeft") prevSlide();
+});
+
+showSlide(0);
+</script>
+
+</body>
+</html>
+
